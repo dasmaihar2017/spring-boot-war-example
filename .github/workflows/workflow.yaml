@@ -1,0 +1,33 @@
+name: Build Spring Boot WAR
+
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the workflow on
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can choose a different runner if needed
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11  # You can change the Java version if needed
+
+      - name: Build the Spring Boot project
+        run: |
+          mvn clean package -DskipTests=true  # You can customize the Maven goals here
+
+      - name: Save the WAR artifact
+        run: |
+          mv target/*.war app.war  # Assuming your WAR file is generated in the 'target' directory
+
+      - name: Upload WAR artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: app.war  # Path to the WAR file you want to upload
