@@ -16,7 +16,16 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
-          java-version: 11  # You can change the Java version if needed
+          java-version: 1.8  # You can change the Java version if needed
+      - name: Get the latest Spring version
+  # You may pin to the exact commit or the version.
+  # uses: shihyuho/go-spring-version@9f72980d26ef9ec6b1b4858724135a4dc65e409a
+        uses: shihyuho/go-spring-version@v1
+        with:
+    
+          boot-version: 2.3.2 # optional
+    # List of dependency identifiers to include in the generated project, can separate with commas
+      
 
       - name: Build the Spring Boot project
         run: |
